@@ -1,2 +1,327 @@
-/* Game Tracker styles. Implemented in Phase 3+.
- * Bind to 127.0.0.1 by default per 2026 baseline. */
+:root {
+    --bg: #1a1a1a;
+    --card-bg: #2a2a2a;
+    --text: #e0e0e0;
+    --text-dim: #999;
+    --accent: #00d9ff;
+    --accent-hover: #00b8d4;
+    --danger: #ff4444;
+    --border: #444;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Segoe UI', -apple-system, system-ui, sans-serif;
+    line-height: 1.6;
+}
+
+header {
+    background: var(--card-bg);
+    padding: 1.5rem 2rem;
+    border-bottom: 2px solid var(--border);
+    margin-bottom: 2rem;
+}
+
+header h1 {
+    font-size: 1.8rem;
+    margin-bottom: 0.5rem;
+}
+
+nav {
+    display: flex;
+    gap: 1rem;
+}
+
+nav a {
+    color: var(--accent);
+    text-decoration: none;
+    padding: 0.5rem 1rem;
+    border-radius: 6px;
+    transition: background 0.2s;
+}
+
+nav a:hover {
+    background: rgba(0, 217, 255, 0.1);
+}
+
+main {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 2rem 2rem;
+}
+
+.controls {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 2rem;
+    flex-wrap: wrap;
+}
+
+input[type="search"],
+select {
+    padding: 0.75rem;
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    color: var(--text);
+    font-size: 1rem;
+}
+
+input[type="search"] {
+    flex: 1;
+    min-width: 200px;
+}
+
+input[type="search"]:focus,
+select:focus {
+    outline: none;
+    border-color: var(--accent);
+}
+
+button {
+    background: var(--accent);
+    color: #000;
+    border: none;
+    padding: 0.75rem 1.5rem;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 1rem;
+    transition: all 0.2s;
+}
+
+button:hover {
+    background: var(--accent-hover);
+    transform: translateY(-1px);
+}
+
+button:active {
+    transform: translateY(0);
+}
+
+.game-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1.5rem;
+}
+
+.game-card {
+    background: var(--card-bg);
+    border-radius: 12px;
+    padding: 1rem;
+    transition: transform 0.2s, box-shadow 0.2s;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+}
+
+.game-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+}
+
+.game-card img,
+.no-image {
+    width: 100%;
+    height: 160px;
+    object-fit: cover;
+    border-radius: 8px;
+    margin-bottom: 1rem;
+}
+
+.no-image {
+    background: linear-gradient(135deg, #2a2a2a 0%, #1a1a1a 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 3rem;
+}
+
+.game-card h3 {
+    font-size: 1.2rem;
+    margin-bottom: 0.5rem;
+    color: var(--text);
+}
+
+.platform {
+    display: inline-block;
+    background: var(--accent);
+    color: #000;
+    padding: 0.25rem 0.75rem;
+    border-radius: 4px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    margin-bottom: 0.75rem;
+}
+
+.game-card select {
+    margin: 0.75rem 0;
+    width: 100%;
+}
+
+.description {
+    font-size: 0.9rem;
+    color: var(--text-dim);
+    margin: 0.75rem 0;
+    flex-grow: 1;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+}
+
+.playtime {
+    color: var(--text-dim);
+    font-size: 0.9rem;
+    margin-bottom: 0.75rem;
+}
+
+.delete-btn {
+    background: var(--danger);
+    padding: 0.5rem;
+    font-size: 0.9rem;
+}
+
+.delete-btn:hover {
+    background: #ff6666;
+}
+
+/* Modal styles */
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.8);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    padding: 1rem;
+}
+
+.modal-content {
+    background: var(--card-bg);
+    padding: 2rem;
+    border-radius: 12px;
+    max-width: 600px;
+    width: 100%;
+    max-height: 90vh;
+    overflow-y: auto;
+}
+
+.modal h2 {
+    margin-bottom: 1.5rem;
+}
+
+.modal input,
+.modal select {
+    width: 100%;
+    margin-bottom: 1rem;
+}
+
+.modal-actions {
+    display: flex;
+    gap: 1rem;
+    margin-top: 1.5rem;
+}
+
+.modal-actions button {
+    flex: 1;
+}
+
+.modal-actions button:last-child {
+    background: var(--border);
+    color: var(--text);
+}
+
+.rawg-results-grid {
+    display: grid;
+    gap: 1rem;
+    margin: 1rem 0;
+}
+
+.rawg-result {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    padding: 1rem;
+    background: var(--bg);
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.rawg-result:hover {
+    background: #252525;
+}
+
+.rawg-result img {
+    width: 100px;
+    height: 60px;
+    object-fit: cover;
+    border-radius: 4px;
+}
+
+.rawg-result input[type="radio"] {
+    margin: 0;
+}
+
+/* Stats page */
+.stats-container h2 {
+    margin-bottom: 2rem;
+    font-size: 2rem;
+}
+
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5rem;
+}
+
+.stat-card {
+    background: var(--card-bg);
+    padding: 2rem;
+    border-radius: 12px;
+    text-align: center;
+}
+
+.stat-card h2 {
+    font-size: 3rem;
+    color: var(--accent);
+    margin-bottom: 0.5rem;
+}
+
+.stat-card h3 {
+    margin-bottom: 1rem;
+    color: var(--accent);
+}
+
+.stat-card p {
+    margin: 0.5rem 0;
+    font-size: 1.1rem;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    .game-grid {
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    }
+
+    .controls {
+        flex-direction: column;
+    }
+
+    input[type="search"] {
+        width: 100%;
+    }
+}

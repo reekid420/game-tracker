@@ -1,0 +1,9 @@
+{
+  "DisplayName": "Test Game One",
+  "InstallLocation": "C:\\Games\\TestGameOne",
+  "LaunchExecutable": "TestGame.exe",
+  "AppName": "TestGameOne123",
+  "bIsApplication": true,
+  "CatalogNamespace": "test-ns",
+  "CatalogItemId": "test-item-id"
+}

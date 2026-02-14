@@ -19,7 +19,7 @@
 
 ---
 
-## Phase 1: Project Setup (Day 1)
+## Phase 1: Project Setup (Day 1) COMPLETE
 
 ### 1.3 Project Structure
 ```
@@ -46,7 +46,7 @@ game-tracker/
 
 ---
 
-## Phase 2: Database Schema (Day 1)
+## Phase 2: Database Schema (Day 1) COMPLETE
 
 ### 2.1 Create Migration
 ```bash
@@ -104,9 +104,9 @@ sqlx migrate run --database-url sqlite:game_tracker.db
 
 ---
 
-## Phase 3: RAWG API Integration (Day 2)
+## Phase 3: RAWG API Integration (Day 2) IN PROGRESS
 
-### 3.1 Get API Key
+### 3.1 Get API Key COMPLETE
 - Sign up at https://rawg.io/apidocs
 - Free tier: 20,000 requests/month
 - Add to `.env`: `RAWG_API_KEY=your_key_here`

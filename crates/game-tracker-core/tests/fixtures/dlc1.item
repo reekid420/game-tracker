@@ -1,0 +1,7 @@
+{
+  "DisplayName": "Test DLC Pack",
+  "InstallLocation": "C:\\Games\\TestGameOne\\DLC",
+  "LaunchExecutable": "",
+  "AppName": "TestDLC456",
+  "bIsApplication": false
+}

@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+{% block title %}Game Tracker - Stats{% endblock %}
+
+{% block content %}
+<div class="stats-container">
+    <h2>📊 Library Statistics</h2>
+
+    <div class="stats-grid">
+        <div class="stat-card">
+            <h2>{{ total_games }}</h2>
+            <p>Total Games</p>
+        </div>
+
+        <div class="stat-card">
+            <h2>{{ total_playtime }}h</h2>
+            <p>Total Playtime</p>
+        </div>
+
+        <div class="stat-card">
+            <h3>By Platform</h3>
+            {% for item in by_platform %}
+                <p>{{ item.0 }}: <strong>{{ item.1 }}</strong></p>
+            {% endfor %}
+        </div>
+
+        <div class="stat-card">
+            <h3>By Status</h3>
+            {% for item in by_status %}
+                <p>{{ item.0 }}: <strong>{{ item.1 }}</strong></p>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% endblock %}

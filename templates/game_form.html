@@ -1,6 +1,66 @@
-{% extends "base.html" %}
-{% block title %}Add/Edit Game{% endblock %}
-{% block content %}
-<h1>Game Form</h1>
-<p>Phase 1 placeholder. Implemented in Phase 3+.</p>
-{% endblock %}
+<div class="modal">
+    <div class="modal-content">
+        <h2>Add New Game</h2>
+
+        <form id="add-game-form">
+            <input type="text" name="title" placeholder="Game Title" required id="game-title">
+
+            <select name="platform" required>
+                <option value="PC">PC</option>
+                <option value="Switch">Switch</option>
+                <option value="PS4">PS4</option>
+                <option value="Emulator">Emulator</option>
+            </select>
+
+            <select name="status">
+                <option value="Backlog">Backlog</option>
+                <option value="Playing">Playing</option>
+                <option value="Completed">Completed</option>
+                <option value="Wishlist">Wishlist</option>
+            </select>
+
+            <input type="text" name="exe_path" placeholder="Path to .exe (PC games only)">
+
+            <button
+                type="button"
+                hx-post="/search-rawg"
+                hx-include="[name='title']"
+                hx-target="#rawg-results">
+                🔍 Search RAWG Database
+            </button>
+        </form>
+
+        <div id="rawg-results">
+            {% if !rawg_results.is_empty() %}
+                <h3>Select Match:</h3>
+                <div class="rawg-results-grid">
+                {% for result in rawg_results %}
+                    <label class="rawg-result">
+                        <input type="radio" name="rawg_id" value="{{ result.id }}" form="add-game-form">
+                        {% if result.background_image.is_some() %}
+                            <img src="{{ result.background_image.as_deref().unwrap_or_default() }}" width="100">
+                        {% endif %}
+                        <div>
+                            <strong>{{ result.name }}</strong><br>
+                            <small>{{ result.released.as_deref().unwrap_or("Unknown") }}</small>
+                        </div>
+                    </label>
+                {% endfor %}
+                </div>
+            {% endif %}
+        </div>
+
+        <div class="modal-actions">
+            <button
+                hx-post="/games"
+                hx-include="#add-game-form, [name='rawg_id']:checked"
+                hx-target="#game-list"
+                hx-swap="innerHTML">
+                Add Game
+            </button>
+            <button type="button" onclick="document.getElementById('add-game-modal').innerHTML = ''">
+                Cancel
+            </button>
+        </div>
+    </div>
+</div>

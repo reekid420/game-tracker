@@ -1,7 +1,22 @@
+# Rust
 /target
+
+# Environment
 .env
+
+# Database
 game_tracker.db
-# Todo2 - AI-powered task management directories
+game_tracker.db-shm
+game_tracker.db-wal
+
+# Node
+node_modules/
+dist/
+
+# Tauri
+src-tauri/gen/
+
+# Todo2
 .cursor/rules/todo2-overview.mdc
 .cursor/rules/todo2.mdc
 .cursor/mcp.json

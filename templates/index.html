@@ -1,6 +1,41 @@
 {% extends "base.html" %}
+
 {% block title %}Game Tracker - Home{% endblock %}
+
 {% block content %}
-<h1>Game Tracker</h1>
-<p>Phase 1 placeholder. Implemented in Phase 3+.</p>
+<div class="controls">
+    <input
+        type="search"
+        name="q"
+        placeholder="Search games..."
+        hx-get="/search"
+        hx-trigger="keyup changed delay:300ms"
+        hx-target="#game-list"
+    >
+
+    <button
+        hx-get="/add-form"
+        hx-target="#add-game-modal"
+        hx-swap="innerHTML">
+        + Add Game
+    </button>
+
+    <select
+        hx-get="/filter"
+        hx-target="#game-list"
+        name="status"
+        hx-trigger="change">
+        <option value="">All</option>
+        <option value="Playing">Playing</option>
+        <option value="Completed">Completed</option>
+        <option value="Backlog">Backlog</option>
+        <option value="Wishlist">Wishlist</option>
+    </select>
+</div>
+
+<div id="add-game-modal"></div>
+
+<div id="game-list">
+    {% include "game_list.html" %}
+</div>
 {% endblock %}

@@ -1,0 +1,38 @@
+<div class="game-card" id="game-{{ game.id }}">
+    {% if game.icon_path.is_some() %}
+        <img src="/{{ game.icon_path.as_deref().unwrap_or_default() }}" alt="{{ game.title }}">
+    {% else if game.cover_url.is_some() %}
+        <img src="{{ game.cover_url.as_deref().unwrap_or_default() }}" alt="{{ game.title }}">
+    {% else %}
+        <div class="no-image">🎮</div>
+    {% endif %}
+
+    <h3>{{ game.title }}</h3>
+    <span class="platform">{{ game.platform }}</span>
+
+    <select
+        hx-post="/games/{{ game.id }}/status"
+        hx-target="#game-{{ game.id }}"
+        hx-swap="outerHTML"
+        name="status">
+        <option {% if game.status == "Backlog" %}selected{% endif %}>Backlog</option>
+        <option {% if game.status == "Playing" %}selected{% endif %}>Playing</option>
+        <option {% if game.status == "Completed" %}selected{% endif %}>Completed</option>
+        <option {% if game.status == "Wishlist" %}selected{% endif %}>Wishlist</option>
+    </select>
+
+    {% if game.description.is_some() %}
+        <p class="description">{{ game.description.as_deref().unwrap_or_default() }}</p>
+    {% endif %}
+
+    <p class="playtime">⏱️ {{ game.playtime_hours }}h</p>
+
+    <button
+        class="delete-btn"
+        hx-delete="/games/{{ game.id }}"
+        hx-target="#game-{{ game.id }}"
+        hx-swap="outerHTML swap:0.5s"
+        hx-confirm="Delete {{ game.title }}?">
+        🗑️
+    </button>
+</div>

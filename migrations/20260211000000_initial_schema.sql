@@ -1,5 +1,9 @@
 -- Game Tracker - Initial schema (Phase 2)
 -- Matches PLAN.md Phase 2.2
+--
+-- games: title, platform, status (Playing/Completed/Backlog/Wishlist), metadata,
+--        icon_path, cover_url, rawg_id, exe_path, playtime_hours, rating
+-- play_sessions: game_id, session_date, duration_minutes, notes (FK CASCADE)
 
 CREATE TABLE games (
     id INTEGER PRIMARY KEY AUTOINCREMENT,

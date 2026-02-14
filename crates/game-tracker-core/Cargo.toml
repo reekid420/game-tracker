@@ -1,0 +1,17 @@
+[package]
+name = "game-tracker-core"
+version.workspace = true
+edition.workspace = true
+
+[dependencies]
+serde = { workspace = true }
+serde_json = { workspace = true }
+sqlx = { workspace = true }
+tokio = { workspace = true }
+reqwest = { workspace = true }
+urlencoding = { workspace = true }
+tracing = { workspace = true }
+log = { workspace = true }
+exeico = "0.1"
+image = "0.25"
+steamlocate = "2"
